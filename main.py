@@ -37,7 +37,7 @@ temp_dir = normpath(temp_dir)
 cn_cert = Mc(connection=Mc.MS_CERT_INFO_CONNECT)
 
 
-def crl_install_lf(info):
+def crl_install_lf(server, info):
     # функция установки CRL
     log_add('installing_crl') % info
     # устанавливаем счетчик попыток установки
@@ -70,7 +70,7 @@ def crl_install_lf(info):
     return 0
 
 
-def cert_install_lf(info):
+def cert_install_lf(server, info):
     # функция установки сертификата
     logger.info(log_add('installing_certificate') % info)
 
@@ -108,12 +108,12 @@ if __name__ == '__main__':
         if namespace.server:
             try:
                 # инициируем лог-файл
-                log_file = join(normpath(log_dir), log_name_mask % server)
+                log_file = join(normpath(log_dir), log_name_mask % namespace.server)
                 init_log_config(log_file)
-                logger_name = 'SERVER_%s' % server
+                logger_name = 'SERVER_%s' % namespace.server
                 logger = logger(logger_name)
 
-                logger.info('Starting (server %s, waiting %s)' % (server, sleep_time))
+                logger.info('Starting (server %s, waiting %s)' % (namespace.server, sleep_time))
 
                 while True:
                     # загружаем данные об установленных сертификатах
@@ -131,8 +131,8 @@ if __name__ == '__main__':
                         if not installed_cert:
                             logger.info(log_add('new_cert_info_found') % rec)
 
-                            cert_install_lf(rec)
-                            crl_install_lf(rec)
+                            cert_install_lf(namespace.server, rec)
+                            crl_install_lf(namespace.server, rec)
 
                     sleep(sleep_time)
 
