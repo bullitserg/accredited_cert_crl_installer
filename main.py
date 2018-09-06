@@ -35,7 +35,6 @@ def create_parser():
 
 temp_dir = normpath(temp_dir)
 cn_cert = Mc(connection=Mc.MS_CERT_INFO_CONNECT)
-server = 1
 
 
 def crl_install_lf(info):
