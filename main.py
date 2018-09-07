@@ -45,7 +45,7 @@ def crl_install_lf(server, info):
     crl_file_location = join(crl_dir, str(rec['sha1Hash']) + '_' + str(server) + '.crl')
     # пробуем загрузить файл по ссылке
     try:
-        wget.download(info['crlUrl'], out=crl_file_location)
+        wget.download(info['crlUrl'], out=crl_file_location, bar=None)
         logger.info(log_add('crl_successfully_download') % info)
     except Exception as crl_err:
         info['download_error'] = crl_err
