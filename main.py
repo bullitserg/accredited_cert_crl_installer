@@ -33,16 +33,17 @@ def create_parser():
                         help="Установить номер сервера")
     return parser
 
-temp_dir = normpath(temp_dir)
+tmp_dir = normpath(tmp_dir)
+crl_dir = normpath(crl_dir)
 cn_cert = Mc(connection=Mc.MS_CERT_INFO_CONNECT)
 
 
 def crl_install_lf(server, info):
     # функция установки CRL
-    log_add('installing_crl') % info
+    log_add('working_crl') % info
     # устанавливаем счетчик попыток установки
     crl_counter = count(start=crl_install_tries, step=-1)
-    crl_file_location = join(temp_dir, crl_for_install % server)
+    crl_file_location = join(crl_dir, str(rec['sha1Hash']) + '_' + server + '.crl')
     # пробуем загрузить файл по ссылке
     try:
         wget.download(info['crlUrl'], out=crl_file_location)
@@ -53,13 +54,16 @@ def crl_install_lf(server, info):
         return
 
     # устанавливаем CRL
+    info['crl_file_location'] = crl_file_location
+    log_add('install_crl') % info
     installation_info = []
     while next(crl_counter):
         crl_install_status, crl_install_error = install_crl(server, crl_file_location,
                                                             is_local=False, test_mode=test_mode)
 
         installation_info.append('OK' if crl_install_status else str(crl_install_error))
-
+        sleep(install_timeout)
+    
     info['installation_info'] = ', '.join(installation_info)
 
     # если была хоть одна успешная попытка установки, то указываем что все ок
@@ -85,6 +89,7 @@ def cert_install_lf(server, info):
                                                                       test_mode=test_mode)
 
         installation_info.append('OK' if cert_install_status else str(cert_install_error))
+        sleep(install_timeout)
 
     info['installation_info'] = ', '.join(installation_info)
 

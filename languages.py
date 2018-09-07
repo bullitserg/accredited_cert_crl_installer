@@ -2,9 +2,10 @@ from config import language
 
 translations = {
     'ENG': {'new_cert_info_found': 'New certificate found',
-            'installing_crl': 'Installing crl',
+            'working_crl': 'CRL working',
             'cant_download_crl': 'Error download CRL (%(crlUrl)s): %(download_error)s',
             'crl_successfully_download': 'CRL successfully download (%(crlUrl)s) ',
+            'installing_crl': 'Install CRL %(crl_file_location)s',
             'crl_successfully_installed': 'CRL successfully installed (%(installation_info)s)',
             'crl_error_installed': 'Error CRL installation: (%(installation_info)s)',
             'installing_certificate': 'Installing certificate %(location)s',
@@ -12,9 +13,10 @@ translations = {
             'certificate_error_installed': 'Error certificate installation (%(installation_info)s)'},
 
     'RUS': {'new_cert_info_found': 'Обнаружен новый сертификат',
-            'installing_crl': 'Установка CRL',
+            'working_crl': 'Обработка CRL',
             'cant_download_crl': 'Ошибка загрузки CRL (%(crlUrl)s): %(download_error)s',
             'crl_successfully_download': 'CRL успешно загружен (%(crlUrl)s) ',
+            'installing_crl': 'Установка CRL %(crl_file_location)s',
             'crl_successfully_installed': 'CRL успешно установлен (%(installation_info)s)',
             'crl_error_installed': 'Ошибка установки CRL: (%(installation_info)s)',
             'installing_certificate': 'Установка сертификата %(location)s',
