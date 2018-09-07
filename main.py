@@ -54,7 +54,7 @@ def crl_install_lf(server, info):
 
     # устанавливаем CRL
     info['crl_file_location'] = crl_file_location
-    log_add('install_crl') % info
+    log_add('installing_crl') % info
     installation_info = []
     while next(crl_counter):
         crl_install_status, crl_install_error = install_crl(server, crl_file_location,
