@@ -121,7 +121,7 @@ if __name__ == '__main__':
 
                 while True:
                     # загружаем данные об установленных сертификатах
-                    mca_file = get_info_file(1, file_type=FILE_MCA, remote_dir=remote_dir)
+                    mca_file = get_info_file(namespace.server, file_type=FILE_MCA, remote_dir=remote_dir)
                     mca_file_o = CertmanagerFile(mca_file)
 
                     # получаем сведения о сертификатах из последней версии файла
