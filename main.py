@@ -63,7 +63,7 @@ def crl_install_lf(server, info):
 
         installation_info.append('OK' if crl_install_status else str(crl_install_error))
         sleep(install_timeout)
-    
+
     info['installation_info'] = ', '.join(installation_info)
 
     # если была хоть одна успешная попытка установки, то указываем что все ок
