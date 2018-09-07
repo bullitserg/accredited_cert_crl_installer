@@ -42,7 +42,7 @@ def crl_install_lf(server, info):
     log_add('working_crl') % info
     # устанавливаем счетчик попыток установки
     crl_counter = count(start=crl_install_tries, step=-1)
-    crl_file_location = join(crl_dir, str(rec['sha1Hash']) + '_' + server + '.crl')
+    crl_file_location = join(crl_dir, str(rec['sha1Hash']) + '_' + str(server) + '.crl')
     # пробуем загрузить файл по ссылке
     try:
         wget.download(info['crlUrl'], out=crl_file_location)
