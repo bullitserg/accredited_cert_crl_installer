@@ -33,7 +33,6 @@ def create_parser():
                         help="Установить номер сервера")
     return parser
 
-tmp_dir = normpath(tmp_dir)
 crl_dir = normpath(crl_dir)
 cn_cert = Mc(connection=Mc.MS_CERT_INFO_CONNECT)
 
