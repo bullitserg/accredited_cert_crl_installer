@@ -1,6 +1,7 @@
 import argparse
 import wget
-from os.path import normpath, join
+from os.path import normpath, join, isfile
+from os import remove
 from itertools import count
 from time import sleep
 from ets.ets_mysql_lib import MysqlConnection as Mc
@@ -43,6 +44,11 @@ def crl_install_lf(server, info):
     # устанавливаем счетчик попыток установки
     crl_counter = count(start=crl_install_tries, step=-1)
     crl_file_location = join(crl_dir, str(rec['sha1Hash']) + '_' + str(server) + '.crl')
+
+    # удаляем файл, если он уже существует
+    if isfile(crl_file_location):
+        remove(crl_file_location)
+
     # пробуем загрузить файл по ссылке
     try:
         wget.download(info['crlUrl'], out=crl_file_location, bar=None)
